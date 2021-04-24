@@ -1,0 +1,30 @@
+# (0.44, 0.85, 0.886, 1.0)
+# (0.02, 0.41, 0.41, 1.0)
+
+<CommonButton>:
+    background_color: (0.44, 0.85, 0.886, 1.0)
+
+<MainScreen>:
+    BoxLayout:
+        padding: ['10dp', '20dp']
+        CommonButton:
+            text: 'Goto auth'
+            on_press: root.manager.current = 'auth'
+        CommonButton:
+            text: 'Quit'
+
+<AuthScreen>:
+    BoxLayout:
+        CommonButton:
+            text: 'My auth button'
+        CommonButton:
+            text: 'Back to main'
+            on_press: root.manager.current = 'main'
+            
+<PersonalAreaScreen>:
+    BoxLayout:
+        CommonButton:
+            text: 'My auth button'
+        CommonButton:
+            text: 'Back to main'
+            on_press: root.manager.current = 'main'
