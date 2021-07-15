@@ -1,0 +1,284 @@
+#:kivy 1.9.1
+
+#:set col1 (0.44, 0.85, 0.886, 1.0)
+#:set col2 (0.02, 0.41, 0.41, 1.0)
+
+<CommonButton>:
+    background_color: col1
+
+<CommonHorizontalButton>:
+
+## ->
+<VgxMainScreen>:
+    size_hint: None, None
+    BoxLayout:
+        size: self.parent.size  # important!
+        pos: self.parent.pos  # important!
+        orientation: 'vertical'
+        spacing: '8dp'
+
+        CommonButton:
+            text: 'Личный кабинет'
+            on_press: root.manager.current = 'personal_area'
+        CommonButton:
+            text: 'Тренировки'
+            on_press: root.manager.current = 'training_screen'
+        CommonButton:
+            text: 'Соревнования'
+            on_press: root.manager.current = 'competitions_screen'
+        CommonButton:
+            text: 'ФОК "Олимп"'
+
+<VgxUI>:
+    AnchorLayout:
+        canvas.before:
+            Color:
+                rgba: col2
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: self.parent.size
+        anchor_x: 'center'
+        anchor_y: 'center'
+        VgxMainScreen:
+            size: '150dp', '220dp'
+
+<PersonalAreaScreen>:
+    size_hint: None, None
+    BoxLayout:
+        size: self.parent.size  # important!
+        pos: self.parent.pos  # important!
+        orientation: 'vertical'
+        spacing: '8dp'
+
+        CommonButton:
+            text: 'Информация о пользователе'
+            on_press: root.manager.current = 'info_user'
+        CommonButton:
+            text: 'Результаты тренировок'
+        CommonButton:
+            text: 'Текущее упражнение'
+            on_press: root.manager.current = 'task_screen'
+        CommonButton:
+            text: 'Результаты соревнований'
+        CommonButton:
+            text: 'Достижения'
+        CommonButton:
+            text: 'Нормативы ГТО'
+        CommonButton:
+            text: 'Нормативы разрядов'
+        CommonButton:
+            text: 'В главное меню'
+            on_press: root.manager.current = 'main'
+
+<PersonalAreaScreenUI>:
+    AnchorLayout:
+        canvas.before:
+            Color:
+                rgba: col2
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: self.parent.size
+        anchor_x: 'center'
+        anchor_y: 'center'
+        PersonalAreaScreen:
+            size: self.parent.size  # important!
+
+
+
+<InfoUserScreen>:
+    size_hint: None, None
+    BoxLayout:
+        size: self.parent.size  # important!
+        pos: self.parent.pos  # important!
+        orientation: 'vertical'
+
+        ## ->
+        spacing: '8dp'
+        BoxLayout:
+            size: self.parent.size  # important!
+            pos: self.parent.pos  # important!
+            orientation: 'vertical'
+            Label:
+                text: 'Выберите пол'
+                size_hint_y: None
+                height: 20
+            Button:
+                text: 'Мужской'
+                size_hint_y: None
+                height: 20
+                on_release: self.select('item1')
+            Button:
+                text: 'Женский'
+                size_hint_y: None
+                height: 20
+                on_release: self.select('item2')
+
+        Label:
+            text: 'Введите вес'
+        TextInput:
+            height: 200
+            id: weight
+            text: ''
+        Label:
+            text: 'Введите возраст'
+        TextInput:
+            id: age_id
+            text: ''  
+        Label:
+            text: 'Введите дистанцию, которую\n проплываете за 45 мин'
+            multiline: True
+        TextInput:
+            id: distant_id
+            text: ''
+        CommonButton:
+            text: 'Сохранить'
+            on_press: root.manager.current = 'personal_area'
+        CommonButton:
+            text: 'Назад'
+            on_press: root.manager.current = 'main'
+        ## -<
+<InfoUserScreenUI>:
+    AnchorLayout:
+        canvas.before:
+            Color:
+                rgba: col2 ##
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: self.parent.size
+        anchor_x: 'center'
+        anchor_y: 'center'
+        InfoUserScreen:
+            size: '150dp', '350dp' ##
+
+
+<TrainingScreen>:
+    size_hint: None, None
+    BoxLayout:
+        size: self.parent.size  # important!
+        pos: self.parent.pos  # important!
+        orientation: 'vertical'
+        spacing: '8dp'
+
+
+        CommonButton:
+            text: 'План тренировок'
+        CommonButton:
+            text: 'Полезная информация'
+        CommonButton:
+            text: 'Связь с тренером'
+        CommonButton:
+            text: 'В главное меню'
+            on_press: root.manager.current = 'main'
+
+<TrainingScreenUI>:
+    AnchorLayout:
+        canvas.before:
+            Color:
+                rgba: col2 ##
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: self.parent.size
+        anchor_x: 'center'
+        anchor_y: 'center'
+        TrainingScreen:
+            size: '150dp', '220dp' ##
+
+# <TaskWrapper>:
+#     padding: 50
+#     BoxLayout:
+#         orientation: 'vertical'
+#         canvas.before:
+#             Color:
+#                 rgba: (0, 0, 0, 1) ##
+#             Rectangle:
+#                 pos: self.pos
+#                 size: self.size
+
+# <TaskScreen>:
+#     canvas.before:
+#         Color:
+#             rgba: col2
+#         Rectangle:
+#             pos: self.pos
+#             size: self.size
+            
+#     ScrollView:
+#         size: self.parent.size  # important!
+#         pos: self.parent.pos  # important!
+#         # orientation: 'vertical'
+#         # spacing: '8dp'
+#         do_scroll_x: False
+#         do_scroll_y: True
+
+
+#         TaskWrapper:
+#             size_hint_y: None
+#             height: '300dp'
+#             spacing: '8dp'
+            
+                
+#             Label:
+#                 text_size: self.size
+#                 halign: 'left'
+#                 text: "Упражение:\n  Кроль"
+#             Label:
+#                 text_size: self.size
+#                 halign: 'left'
+#                 text: "Дистанция:\n  4x50м"
+#             Label:
+#                 text_size: self.size
+#                 halign: 'left'
+#                 text: "Скорость:\n  1"
+            
+
+#             CommonButton:
+#                 text: 'В главное меню'
+#                 on_press: root.manager.current = 'main'
+
+
+<CompetitionsScreen>:
+    size_hint: None, None
+    BoxLayout:
+        size: self.parent.size  # important!
+        pos: self.parent.pos  # important!
+        orientation: 'vertical'
+        spacing: '8dp'
+
+        CommonButton:
+            text: 'Планируемые'
+        CommonButton:
+            text: 'Прошедшие'
+        CommonButton:
+            text: 'Подать заявку'
+        CommonButton:
+            text: 'В главное меню'
+            on_press: root.manager.current = 'main'
+
+<CompetitionsScreenUI>:
+    AnchorLayout:
+        canvas.before:
+            Color:
+                rgba: col2 ##
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        size: self.parent.size
+        anchor_x: 'center'
+        anchor_y: 'center'
+        CompetitionsScreen:
+            size: '150dp', '220dp' ##
+## <-
+
+
+
+
+
+
+<VgxApp>:
+    FloatLayout:
+        VgxUI:
+            center: 0.5, 0.5
