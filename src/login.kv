@@ -1,100 +1,248 @@
 #:kivy 2.0.0
 
+<UI>:
+    Screen:
+        name: "login_screen"
+        MDCard:
+            size_hint: None, None
+            size: dp(300),dp(500)
+            pos_hint: {"center_x":0.5, "center_y": 0.5}
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+            # canvas.before:
+            #     Color:
+            #         rgba: 0, 1, 1, 1
+            #     Rectangle:
+            #         pos: self.pos
+            #         size: self.size
 
-Screen:
+            MDBoxLayout:
+                size_hint: (1, None)
+                pos_hint : {"center_x":0.5}
+                Image:
+                    source: "./image/logo_auth.png"
 
-    MDCard:
-        size_hint: None, None
-        size: 300,500
-        pos_hint: {"center_x":0.5, "center_y": 0.5}
-        padding: 25
-        spacing: 25
-        orientation: 'vertical'
-        # canvas.before:
-        #     Color:
-        #         rgba: 0, 1, 1, 1
-        #     Rectangle:
-        #         pos: self.pos
-        #         size: self.size
+            MDLabel:
+                id: welcome_label
+                text: "Welcome"
+                font_size: 40
+                haling: 'center'
+                size_hint_y: None
+                height: self.texture_size[1]
+                padding_y: dp(15)
 
-        MDBoxLayout:
-            size_hint: (1, None)
-            pos_hint : {"center_x":0.5}
-            Image:
-                source: "./image/logo_auth.png"
+            MDTextFieldRound:
+                id: user
+                hint_text: "Имя пользователя"
+                icon_right: "account"
+                size_hint_x: None
+                width : 220
+                font_size: 18
+                pos_hint : {"center_x":0.5}
 
-        MDLabel:
-            id: welcome_label
-            text: "Welcome"
-            font_size: 40
-            haling: 'center'
-            size_hint_y: None
-            height: self.texture_size[1]
-            padding_y: 15
+            MDTextFieldRound:
+                id: password
+                hint_text: "Пароль"
+                icon_right: "eye-off"
+                size_hint_x: None
+                width : 220
+                font_size: 18
+                pos_hint : {"center_x":0.5}
+                password: True
+            
+            BoxLayout:
+                size_hint_y: None
+                height: self.minimum_height
+                adaptive_width: True
 
-        MDTextFieldRound:
-            id: user
-            hint_text: "Имя пользователя"
-            icon_right: "account"
-            size_hint_x: None
-            width : 220
-            font_size: 18
-            pos_hint : {"center_x":0.5}
+                MDTextButton:
+                    markup: True
+                    size_hint_x: None
+                    text: "[u]Забыли пароль[/u]"
+                    font_size:15
+                    pos_hint: {"center_y":0.5}
+                    on_press: app.authorization_forgot_password()
 
-        MDTextFieldRound:
-            id: password
-            hint_text: "Пароль"
-            icon_right: "eye-off"
-            size_hint_x: None
-            width : 220
-            font_size: 18
-            pos_hint : {"center_x":0.5}
-            password: True
-        
-        BoxLayout:
-            size_hint_y: None
-            height: self.minimum_height
-            adaptive_width: True
+                Widget:
+                    size_hint_x: None
+                    width : 50
+
+                MDRoundFlatButton:
+                    markup: True
+                    text: "[color=#000][b]Войти[/b][/color]"
+                    font_size:15
+                    pos_hint: {"right_x":0.5}
+                    on_press: app.authorization_logger()
+                    on_release: root.current = "main_menu_screen"
+
+            Widget:
+                size_hint_y: None
+                height: 20
+                    
+            MDTextButton:
+                markup: True
+                size_hint_x: None
+                text: "[u]Зарегистироваться[/u]"
+                font_size:12
+                pos_hint: {"center_x":0.5}
+                on_press: app.authorization_forgot_password()
+
+
+    Screen:
+        name: "main_menu_screen"
+        MDCard:
+            size_hint: None, None
+            size: 300,500
+            pos_hint: {"center_x":0.5, "center_y": 0.5}
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
 
             MDTextButton:
                 markup: True
                 size_hint_x: None
-                text: "[u]Забыли пароль[/u]"
-                font_size:15
-                pos_hint: {"center_y":0.5}
-                on_press: app.authorization_forgot_password()
+                #добавить нижнее подчеркивание в конце
+                text: "[u]  Главное меню[/u]"
+                font_size:20
+                pos_hint: {"center_x":0.5}
+            
+            Widget:
+                size_hint_y: None
+                height: 15
+
+            MDFillRoundFlatButton:
+                text: "Личный кабинет"
+                #надо как-то добавить цвет ебучей линии
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, .25)
+                on_release: root.current = "main_personal_area_screen"
+
+            MDFillRoundFlatButton:
+                text: "Тренировки"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, .25)
+
+            MDFillRoundFlatButton:
+                text: "Соревнования"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, .25)
+
+            MDFillRoundFlatButton:
+                text: "ФОК 'ОЛИМП' "
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, .25)
+                _radius: 15
 
             Widget:
-                size_hint_x: None
-                width : 50
+                size_hint_y: None
+                height: 15
+            
+            # Возможнго по дизайну будет лучше это
+            # MDRoundFlatButton:
+            #     text: "MDFLATBUTTON"
+            #     line_color: 0.2, 0, 0, 1
+            #     line_width: 1.5
+            #     md_bg_color: [0.98, 0.94, 0.74, 1]
+            #     _radius: 10
+            #     pos_hint: {"center_x":0.5}
+            #     size_hint : (0.9, .25)
 
-            MDRoundFlatButton:
+            MDTextButton:
                 markup: True
-                text: "[color=#000][b]Войти[/b][/color]"
-                font_size:15
-                pos_hint: {"right_x":0.5}
-                on_press: app.authorization_logger()
-            
-            
-        # BoxLayout:
-        #     size_hint_y: None
-        #     height: self.minimum_height
-        #     adaptive_width: True
-        #     Widget:
-        #         size_hint_x: 1
-        #         width : 25
-        Widget:
-            size_hint_y: None
-            height: 20
+                size_hint_x: None
+                #добавить нижнее подчеркивание в конце
+                text: "[u]  Выйти[/u]"
+                font_size:20
+                pos_hint: {"center_x":0.5}
+                on_press: app.exit()
                 
-        MDTextButton:
-            markup: True
-            size_hint_x: None
-            text: "[u]Зарегистироваться[/u]"
-            font_size:12
-            pos_hint: {"center_x":0.5}
-            on_press: app.authorization_forgot_password()
 
+    Screen:
+        name: "main_personal_area_screen"
+        MDCard:
+            size_hint: None, None
+            size: 300,500
+            pos_hint: {"center_x":0.5, "center_y": 0.5}
+            padding: 25
+            spacing: 25
+            orientation: 'vertical'
+
+            MDTextButton:
+                markup: True
+                size_hint_x: None
+                #добавить нижнее подчеркивание в конце
+                text: "[b][u]  Личный кабинет[/u][/b]"
+                font_size:20
+                pos_hint: {"center_x":0.5}
+            
+            
+
+            MDFillRoundFlatButton:
+                text: "Личная информация"
+                #надо как-то добавить цвет ебучей линии
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+                padding_y: 10
+
+            MDFillRoundFlatButton:
+                text: "Результаты ренировок"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+
+            MDFillRoundFlatButton:
+                text: "Достижения"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+
+            MDFillRoundFlatButton:
+                text: "Нормативы ГТО"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+            
+            MDFillRoundFlatButton:
+                text: "Нормативы разрядов"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+            
+            MDFillRoundFlatButton:
+                text: "Результаты соревнований"
+                md_bg_color: [0.98, 0.94, 0.74, 1]
+                pos_hint: {"center_x":0.5}
+                size_hint : (0.9, 1)
+                _radius: 10
+            
+            
+            MDTextButton:
+                markup: True
+                size_hint_x: None
+                #добавить нижнее подчеркивание в конце
+                text: "[b][u]  Назад в главное меню[/u][/b]"
+                font_size:15
+                pos_hint: {"center_x":0.5}
+                on_release: root.current = "main_menu_screen"
+
+    
+        
+
+            
+
+        
+            
 
         
         
